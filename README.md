@@ -42,38 +42,39 @@ log_pattern = re.compile(
     r'"(?P<method>\w+) (?P<endpoint>[^\s]+) [^"]+" (?P<status>\d+) (?P<size>\d+)'
 )
 ```
-Breakdown:
+
+**Breakdown**:
 (?P<ip>\d+\.\d+\.\d+\.\d+):
 
-Captures the IP address.
+1.**Captures the IP address**
 Example match: 192.168.1.1.
 This part of the pattern ensures that we capture the full IP address, which consists of four sets of numbers separated by dots.
 - - \[(?P<datetime>[^\]]+)\]:
 
-Captures the timestamp within square brackets.
-Example match: [03/Dec/2024:10:12:34 +0000].
-The square brackets [] are escaped using a backslash \ because they are special characters in regex. The [^]]+ ensures we capture everything inside the square brackets until the closing bracket.
+2.**Captures the timestamp within square brackets**
+-Example match: [03/Dec/2024:10:12:34 +0000].
+-The square brackets [] are escaped using a backslash \ because they are special characters in regex. The [^]]+ ensures we capture everything inside the square brackets until the closing bracket.
 "(?P<method>\w+):
 
-Captures the HTTP method (e.g., GET, POST).
-Example match: GET.
-The \w+ captures one or more word characters (letters, digits, and underscores), which corresponds to the HTTP method.
+3.**Captures the HTTP method (e.g., GET, POST)**
+-Example match: GET.
+-The \w+ captures one or more word characters (letters, digits, and underscores), which corresponds to the HTTP method.
 (?P<endpoint>[^\s]+):
 
-Captures the resource or endpoint being accessed.
-Example match: /home.
-This part captures the URL or resource after the HTTP method, ensuring it doesn't capture any spaces after it.
+4.**Captures the resource or endpoint being accessed**
+-Example match: /home.
+-This part captures the URL or resource after the HTTP method, ensuring it doesn't capture any spaces after it.
 [^"]+":
 
-Matches the HTTP version and skips unnecessary details.
-This portion captures everything between the endpoint and the next double quote ("), which typically contains the HTTP version like HTTP/1.1.
+5.**Matches the HTTP version and skips unnecessary details**
+-This portion captures everything between the endpoint and the next double quote ("), which typically contains the HTTP version like HTTP/1.1.
 (?P<status>\d+):
 
-Captures the HTTP status code.
-Example match: 200.
-The \d+ matches one or more digits, which corresponds to the numeric HTTP status code (e.g., 200, 404).
+6.** the HTTP status code**
+-Example match: 200.
+-The \d+ matches one or more digits, which corresponds to the numeric HTTP status code (e.g., 200, 404).
 (?P<size>\d+):
 
 Captures the response size in bytes.
-Example match: 512.
-Similar to the status code, \d+ is used here to capture one or more digits, which represent the size of the response in bytes.
+-Example match: 512.
+-Similar to the status code, \d+ is used here to capture one or more digits, which represent the size of the response in bytes.
